@@ -1,14 +1,37 @@
+<script context="module">
+	export async function load() {
+		const url = 'https://pokeapi.co/api/v2/pokemon?limit=150';
+		const response = await fetch(url);
+		const data = await response.json();
+		const pokemon = data.results.map((data, index) => {
+			const name = data.name;
+			const id = index + 1;
+			return {
+				name,
+				id,
+				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
+			};
+		});
+
+		return { props: { pokemon } };
+	}
+</script>
+
 <script>
-	import { pokemon } from '../stores/pokestore';
+import { onMount } from 'svelte';
+
 	import PokemanCard from '../components/PokemanCard.svelte';
 
-	let searchTerm, filteredPokemon;
+	export let pokemon;
+	let filteredPokemon, searchTerm, inputElement;
 
 	$: {
 		searchTerm
-			? (filteredPokemon = [...$pokemon.filter((pokeman) => pokeman.name.toLowerCase().includes(searchTerm.toLowerCase()))])
-			: (filteredPokemon = [...$pokemon]);
+			? (filteredPokemon = [...pokemon.filter((pokeman) =>pokeman.name.toLowerCase().includes(searchTerm.toLowerCase()))])
+			: (filteredPokemon = [...pokemon]);
 	}
+
+	onMount(() => inputElement.focus());
 </script>
 
 <svelte:head>
@@ -22,6 +45,7 @@
 	type="text"
 	placeholder="Search Pokemon"
 	bind:value={searchTerm}
+	bind:this={inputElement}
 />
 
 <div class="py-4 grid gap-4 md:grid-cols-2 grid-cols-1">
