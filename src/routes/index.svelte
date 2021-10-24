@@ -1,19 +1,25 @@
 <script context="module">
-	export async function load() {
+	async function getGreeting(fetch) {
+		const response = await fetch('api/greetings');
+		const { greeting } = await response.json();
+		return greeting;
+	}
+
+	async function getPokemon() {
 		const url = 'https://pokeapi.co/api/v2/pokemon?limit=150';
 		const response = await fetch(url);
 		const data = await response.json();
-		const pokemon = data.results.map((data, index) => {
+		return data.results.map((data, index) => {
 			const name = data.name;
 			const id = index + 1;
-			return {
-				id,
-				name,
-				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-			};
+			const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+			return { id, name, image };
 		});
+	}
 
-		return { props: { pokemon } };
+	export async function load({ fetch }) {
+		const [greeting, pokemon] = await Promise.all([getGreeting(fetch), getPokemon()]);
+		return { props: { greeting, pokemon } };
 	}
 </script>
 
@@ -21,13 +27,12 @@
 	import { onMount } from 'svelte';
 	import PokemanCard from '../components/PokemanCard.svelte';
 	
-	export let pokemon;
+	export let greeting, pokemon;
 	let filteredPokemon, searchTerm, inputElement;
 
 	$: {
-		searchTerm
-			? (filteredPokemon = [...pokemon.filter((pokeman) =>pokeman.name.toLowerCase().includes(searchTerm.toLowerCase()))])
-			: (filteredPokemon = [...pokemon]);
+		const byName = (pokeman) => pokeman.name.toLowerCase().includes(searchTerm).toLowerCase();
+		searchTerm ? (filteredPokemon = [...pokemon.filter(byName)]) : (filteredPokemon = [...pokemon]);
 	}
 
 	onMount(() => inputElement.focus());
@@ -37,7 +42,7 @@
 	<title>Svelte Kit Pokedex</title>
 </svelte:head>
 
-<h1 class="text-4xl text-center my-8 uppercase">Svelte Kit Pokedex</h1>
+<h1 class="text-4xl text-center my-8 uppercase">{greeting}</h1>
 
 <input
 	class="w-full rounded-md text-lg p-4 border-2 border-gray-200"

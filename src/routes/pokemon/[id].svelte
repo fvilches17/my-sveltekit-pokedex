@@ -13,6 +13,10 @@
 	const { height, name, sprites, weight } = pokeman;
 </script>
 
+<svelte:head>
+	<title>{name}</title>
+</svelte:head>
+
 <div class="flex flex-col items-center">
 	<h1 class="text-4xl text-center my-8 uppercase">{name}</h1>
 
