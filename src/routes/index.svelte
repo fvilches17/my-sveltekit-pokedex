@@ -7,8 +7,8 @@
 			const name = data.name;
 			const id = index + 1;
 			return {
-				name,
 				id,
+				name,
 				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
 			};
 		});
@@ -18,10 +18,9 @@
 </script>
 
 <script>
-import { onMount } from 'svelte';
-
+	import { onMount } from 'svelte';
 	import PokemanCard from '../components/PokemanCard.svelte';
-
+	
 	export let pokemon;
 	let filteredPokemon, searchTerm, inputElement;
 
@@ -49,7 +48,7 @@ import { onMount } from 'svelte';
 />
 
 <div class="py-4 grid gap-4 md:grid-cols-2 grid-cols-1">
-	{#each filteredPokemon as pokeman}
+	{#each filteredPokemon as pokeman (pokeman.id)}
 		<PokemanCard {pokeman} />
 	{/each}
 </div>
