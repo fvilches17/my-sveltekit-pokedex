@@ -10,8 +10,8 @@
 		const response = await fetch(url);
 		const data = await response.json();
 		return data.results.map((data, index) => {
-			const name = data.name;
 			const id = index + 1;
+			const name = data.name;
 			const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 			return { id, name, image };
 		});
