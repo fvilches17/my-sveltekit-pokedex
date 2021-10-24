@@ -1,11 +1,9 @@
 {
-    "css.validate": false,
-    "editor.quickSuggestions": {
-        "strings": true
-    },
-    "tailwindCSS.classAttributes": [
-        "class"
-    ],
-    "tailwindCSS.emmetCompletions": true,
-    "debug.allowBreakpointsEverywhere": true
+	"css.validate": false,
+	"editor.quickSuggestions": {
+		"strings": true
+	},
+	"tailwindCSS.classAttributes": ["class"],
+	"tailwindCSS.emmetCompletions": true,
+	"debug.allowBreakpointsEverywhere": true
 }

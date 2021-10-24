@@ -26,7 +26,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import PokemanCard from '../components/PokemanCard.svelte';
-	
+
 	export let greeting, pokemon;
 	let filteredPokemon, searchTerm, inputElement;
 
