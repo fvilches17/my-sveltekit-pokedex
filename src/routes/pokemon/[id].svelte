@@ -10,17 +10,22 @@
 
 <script>
 	export let pokeman;
-	let { height, name, sprites, types, weight } = pokeman;
-	const type = types[0].type.name;
+	const { height, name, sprites, weight } = pokeman;
 </script>
 
 <div class="flex flex-col items-center">
 	<h1 class="text-4xl text-center my-8 uppercase">{name}</h1>
 
 	<p>
-		Type: <strong>{type}</strong> | Height: <strong>{height}</strong> | Weight:
-		<strong>{weight}</strong>
+		Height: <strong>{height}</strong> | Weight: <strong>{weight}</strong>
 	</p>
 
 	<img src={sprites['front_default']} alt={name} />
+
+	<button
+		class="bg-gray-800 hover:bg-gray-700 rounded-lg text-gray-200 p-2 hover:shadow-md"
+		on:click={() => window.history.back()}
+	>
+		Back
+	</button>
 </div>
