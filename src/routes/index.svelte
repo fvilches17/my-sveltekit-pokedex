@@ -2,8 +2,7 @@
 	import { pokemon } from '../stores/pokestore';
 	import PokemanCard from '../components/PokemanCard.svelte';
 
-	let searchTerm;
-	let filteredPokemon = [];
+	let searchTerm, filteredPokemon;
 
 	$: {
 		searchTerm
@@ -17,7 +16,6 @@
 </svelte:head>
 
 <h1 class="text-4xl text-center my-8 uppercase">Svelte Kit Pokedex</h1>
-<small class="font-mono">Count: {filteredPokemon.length}</small>
 
 <input
 	class="w-full rounded-md text-lg p-4 border-2 border-gray-200"
