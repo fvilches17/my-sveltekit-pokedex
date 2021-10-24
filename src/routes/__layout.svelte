@@ -1,5 +1,5 @@
 <script>
-	import Nav from '../components/Nav.svelte';
+	import Nav from '$lib/Nav.svelte';
 </script>
 
 <div class="p-8 max-w-6xl mx-auto">
