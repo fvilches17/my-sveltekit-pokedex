@@ -1,4 +1,17 @@
+<script>
+	import { page } from '$app/stores';
+
+	let links = [
+		{ id: 1, title: 'Home', path: '/' },
+		{ id: 2, title: 'About', path: '/about' }
+	];
+</script>
+
 <nav class="flex justify-center w-full">
-    <a class="mx-4 text-lg" href="/">Home</a>
-    <a class="mx-4 text-lg" href="/about">About</a>
+	{#each links as link (link.id)}
+		<a
+			class={`mx-4 text-lg hover:text-gray-500 ${$page.path === link.path && 'text-blue-700'}`}
+			href={link.path}>{link.title}</a
+		>
+	{/each}
 </nav>
