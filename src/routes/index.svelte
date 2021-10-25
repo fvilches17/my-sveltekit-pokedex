@@ -41,10 +41,10 @@
 </script>
 
 <svelte:head>
-	<title>Svelte Kit Pokedex</title>
+	<title>{greeting}</title>
 </svelte:head>
 
-<Header title={greeting} />
+<Header title={import.meta.env.VITE_MESSAGE} />
 
 <input
 	class="w-full rounded-md text-lg p-4 border-2 border-gray-200"
