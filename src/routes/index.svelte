@@ -33,7 +33,7 @@
 	let filteredPokemon, searchTerm, inputElement;
 
 	$: {
-		const byName = (pokeman) => pokeman.name.toLowerCase().includes(searchTerm).toLowerCase();
+		const byName = (pokeman) => pokeman.name.includes(searchTerm.toLowerCase());
 		searchTerm ? (filteredPokemon = [...pokemon.filter(byName)]) : (filteredPokemon = [...pokemon]);
 	}
 
