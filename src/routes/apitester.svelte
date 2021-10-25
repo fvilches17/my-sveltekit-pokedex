@@ -15,6 +15,12 @@
 		const { count } = await res.json();
 		currentCount = count;
 	};
+
+	let date = '...';
+	const loadDate = async () => {
+		const res = await fetch('api/date');
+		date = await res.text();
+	};
 </script>
 
 <svelte:head>
@@ -30,7 +36,12 @@
 	</button>
 
 	<p>{currentCount}</p>
-	<button class="bg-gray-900 text-white rounded-md p-2 mt-2" on:click={loadCount}>
+	<button class="bg-gray-900 text-white rounded-md p-2 my-2" on:click={loadCount}>
 		Get count
+	</button>
+
+	<p>{date}</p>
+	<button class="bg-gray-900 text-white rounded-md p-2 my-2" on:click={loadDate}>
+		Get Date (python 🐍)
 	</button>
 </div>
