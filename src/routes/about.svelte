@@ -8,7 +8,7 @@
 </script>
 
 <svelte:head>
-	<title>About the Svelte Kit Pokedex</title>
+	<title>About Svelte Kit Pokedex</title>
 </svelte:head>
 
 <Header title='About' />
