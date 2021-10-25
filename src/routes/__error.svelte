@@ -9,7 +9,8 @@
 </script>
 
 <script>
+	import Header from '$lib/Header.svelte';
 	export let title;
 </script>
 
-<h1>{title}</h1>
+<Header {title} />

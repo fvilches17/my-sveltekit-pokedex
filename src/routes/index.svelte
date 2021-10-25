@@ -6,7 +6,8 @@
 	}
 
 	async function getPokemon() {
-		const url = 'https://pokeapi.co/api/v2/pokemon?limit=150';
+		const apiBaseUri = import.meta.env.VITE_POKEDEX_BASE_URI;
+		const url = `${apiBaseUri}/v2/pokemon?limit=150`;
 		const response = await fetch(url);
 		const data = await response.json();
 		return data.results.map((data, index) => {
@@ -25,6 +26,7 @@
 
 <script>
 	import { onMount } from 'svelte';
+	import Header from '$lib/Header.svelte';
 	import PokemanCard from '$lib/PokemanCard.svelte';
 
 	export let greeting, pokemon;
@@ -42,7 +44,7 @@
 	<title>Svelte Kit Pokedex</title>
 </svelte:head>
 
-<h1 class="text-4xl text-center my-8 uppercase">{greeting}</h1>
+<Header title={greeting} />
 
 <input
 	class="w-full rounded-md text-lg p-4 border-2 border-gray-200"

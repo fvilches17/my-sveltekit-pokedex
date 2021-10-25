@@ -1,7 +1,8 @@
 <script context="module">
 	export async function load({ page }) {
 		const id = page.params.id;
-		const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+		const apiBaseUri = import.meta.env.VITE_POKEDEX_BASE_URI;
+		const url = `${apiBaseUri}/v2/pokemon/${id}`;
 		const res = await fetch(url);
 		const pokeman = await res.json();
 		return { props: { pokeman } };
@@ -9,6 +10,7 @@
 </script>
 
 <script>
+	import Header from '$lib/Header.svelte';
 	export let pokeman;
 	const { height, name, sprites, weight } = pokeman;
 </script>
@@ -18,7 +20,7 @@
 </svelte:head>
 
 <div class="flex flex-col items-center">
-	<h1 class="text-4xl text-center my-8 uppercase">{name}</h1>
+	<Header title={name} />
 
 	<p>
 		Height: <strong>{height}</strong> | Weight: <strong>{weight}</strong>

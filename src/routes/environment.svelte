@@ -1,19 +1,20 @@
 <script>
-    const pageTitle = 'Pokedex Environment Variables';
+	import Header from '$lib/Header.svelte';
+	const title = 'Pokedex Environment Variables';
+	const envVars = Object.entries(import.meta.env).map((kv) => ({ key: kv[0], val: kv[1] }));
 </script>
 
 <svelte:head>
-	<title>{pageTitle}</title>
+	<title>{title}</title>
 </svelte:head>
 
-<h1 class="text-4xl text-center my-8 uppercase">{pageTitle}</h1>
+<Header {title} />
 
-<ul>
-	<li>Base Url: {import.meta.env.BASE_URL}</li>
-	<li>Dev: {import.meta.env.DEV}</li>
-	<li>Mode: {import.meta.env.MODE}</li>
-	<li>Prod: {import.meta.env.PROD}</li>
-	<li>Ssr: {import.meta.env.SSR}</li>
-	<li>Message: {import.meta.env.VITE_MESSAGE}</li>
-	<li>Secret: {import.meta.env.SECRET}</li>
-</ul>
+<table class="m-auto divide-y divide-gray-200">
+	{#each envVars as kv}
+		<tr class="p-10 text-left">
+			<th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{kv.key}</th>
+			<td class="px-6 py-4 whitespace-nowrap">{kv.val}</td>
+		</tr>
+	{/each}
+</table>
