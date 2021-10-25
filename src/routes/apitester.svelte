@@ -8,6 +8,13 @@
 		const { greeting } = await res.json();
 		displayGreeting = greeting;
 	};
+
+	let currentCount = 0;
+	const loadCount = async () => {
+		const res = await fetch('api/count');
+		const { count } = await res.json();
+		currentCount = count;
+	};
 </script>
 
 <svelte:head>
@@ -18,7 +25,12 @@
 
 <div class="text-center">
 	<p>{displayGreeting}</p>
-	<button class="bg-gray-900 text-white rounded-md p-2 mt-2" on:click={loadGreetingManual}>
+	<button class="bg-gray-900 text-white rounded-md p-2 my-2" on:click={loadGreetingManual}>
 		Get Greeting
+	</button>
+
+	<p>{currentCount}</p>
+	<button class="bg-gray-900 text-white rounded-md p-2 mt-2" on:click={loadCount}>
+		Get count
 	</button>
 </div>
